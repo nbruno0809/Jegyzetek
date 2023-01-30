@@ -1,0 +1,53 @@
+<%- include('header',{pagetitle:'Jegyzetek'}) -%>
+    <div class="container">
+        <div class="row">
+        </div class="col-12">
+        <h1>Jegyzetek <%= targy.nev %> tárgyból</h1>
+        <table class="table table-striped table-bordered">
+            <tr>
+                <th>
+                    Oldalszám
+                </th>
+                <th>
+                    Nyelv
+                </th>
+                <th>
+                    Év
+                </th>
+                <th>
+                    Típus
+                </th>
+                <th>
+                    &nbsp
+                </th>
+            </tr>
+
+
+            <% jegyzetek.forEach(function (jegyzet) { %> 
+                <tr>
+                    <td>
+                        <%= jegyzet.oldalszam %> 
+                    </td>
+                    <td>
+                        <%= jegyzet.nyelv %> 
+                    </td>
+                    <td>
+                        <%= jegyzet.ev %> 
+                    </td>
+                    <td>
+                        <%= jegyzet.tipus %> 
+                    </td>
+                    <td>
+                        <a href="/jegyzetek/<%= targy._id %>/<%= jegyzet._id %>" class="btn btn-sm btn-primary">Módosít</a>
+                        <a href="/jegyzettorles/<%= targy._id %>/<%= jegyzet._id %>" class="btn btn-sm btn-danger">Törlés</a>
+                    </td>
+                </tr>
+                <% }); %> 
+
+        </table>
+        <a href="/ujjegyzet/<%= targy._id %>" class="btn btn-lg btn-primary">Hozzáad</a>
+        <a href="/" class="btn btn-lg btn-primary">Főoldal</a>
+        </div>
+
+    </div>
+    <%- include('footer') -%>

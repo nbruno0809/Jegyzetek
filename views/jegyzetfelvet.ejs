@@ -1,0 +1,63 @@
+<%- include('header', {pagetitle:'jegyzet adatok'}) -%>
+    <div class="container">
+        <%  if (typeof jegyzet === "undefined") { %>
+            <h1>Új jegyzet</h1>
+          <% } else {%> 
+            <h1>Jegyzet mósodítása</h1>
+          <% } %> 
+        <div class="row">
+        </div class="col-12">
+            <form method="POST">
+                <input type="hidden" name="id" <%  if (typeof jegyzet !== "undefined") { %>
+                    value=<%=jegyzet._id  %>
+                  <% } %> 
+                  />
+                <div class="form-group">
+                  <label for="pagesInput">Oldalszám:</label>
+                  <input type="number" class="form-control" id="pagesInput" name="oldalszam" <%  if (typeof jegyzet !== "undefined") { %>
+                    value=<%=jegyzet.oldalszam  %>
+                  <% } %> 
+                  >
+                </div>
+                <div class="form-group">
+                  <label for="languageInput">Nyelv:</label>
+                  <input type="text" class="form-control" id="languageInput" name="nyelv" <%  if (typeof jegyzet !== "undefined") { %>
+                    value=<%=jegyzet.nyelv  %>
+                  <% } %> 
+                  >
+                </div>
+                <div class="form-group">
+                    <label for="yearInput">Év:</label>
+                    <input type="number" class="form-control" id="yearInput" min="1900" max="2030" name="ev" <%  if (typeof jegyzet !== "undefined") { %>
+                        value=<%=jegyzet.ev  %>
+                      <% } %> 
+                      >
+                </div>
+                <div class="form-group">
+                    <label for="yearInput">Típus</label>
+
+                    <select id="yearInput" name="tipus" class="form-control" >
+
+                      <%
+                      var options = [ "írott", "nyomtatott", "digitális" ];
+                      for ( var i = 0; i < options.length; i++ )
+                      {
+                        if (typeof jegyzet === 'undefined') {
+                          var selected = ( i===1 ) ? "selected" : "";
+                          %><option value="<%=options[ i ] %>" <%=selected %>><%=options[ i ] %></option><%
+                        } else {
+                          var selected = ( jegyzet.tipus === options[i] ) ? "selected" : "";
+                          %><option value="<%=options[ i ] %>" <%=selected %>><%=options[ i ] %></option><%
+                        }
+                      }
+                      %>
+                      </select> 
+                </div>
+                  <input type="submit" href="/jegyzetek/<%= targy._id %> " value="Mentés" class="bt btn-lg btn-primary" />
+                  <a href="/jegyzetek/<%= targy._id %>" class="bt btn-lg btn-danger">Mégse</a>
+              </form>
+        </div>
+
+    </div>
+   
+    <%- include('footer') -%>
